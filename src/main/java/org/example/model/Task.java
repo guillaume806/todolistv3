@@ -14,9 +14,9 @@ public class Task {
     private String title;
     private boolean completed;
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User u;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="User_id")
+    private User user;
 
     @OneToOne(mappedBy = "task",cascade = CascadeType.ALL,orphanRemoval = true)
     private TaskInfo taskInfo;

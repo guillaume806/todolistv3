@@ -10,11 +10,11 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     private String firstname;
 
-    @OneToMany(mappedBy = "u")
+    @OneToMany(mappedBy = "user")
     private List<Task> tasks;
 
     public User() {

@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.impl.TaskDAOImpl;
 import org.example.model.Task;
 import org.example.model.TaskInfo;
+import org.example.model.User;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -160,6 +161,9 @@ public class ToDoListAppConsole {
         int priority = scanner.nextInt();
         scanner.nextLine();
 
+        // Creation d utilisateur
+        User user = new User();
+        user.setFirstname(name);
         // Creation de la tache
         Task task = new Task();
         task.setTitle(title);
@@ -167,17 +171,30 @@ public class ToDoListAppConsole {
 
 
         //Creation de la taskinfo
-        TaskInfo taskInfo = new TaskInfo(description,dueDate,priority);
+        TaskInfo taskInfo = new TaskInfo(description, dueDate, priority);
 
         // Mise en relation
         task.setTaskInfo(taskInfo);
         taskInfo.setTask(task);
 
-        if(taskDAO.addTask(task)){
+        if (taskDAO.addTask(task)) {
             System.out.println("Tâche ajoutée avec succès !");
-        }else {
+        } else {
             System.out.println("Erreur");
         }
 
     }
-}
+//    private static  void deleteUser(Scanner scanner) {
+//        System.out.println("Entrez l'ID de l'utilisateur' à supprimer : ");
+//        Long userId = scanner.nextLong();
+//        scanner.nextLine();
+//
+//        if (taskDAO.deleteTask(userId)) {
+//            System.out.println("Suppression OK");
+//        } else {
+//            System.out.println("Erreur");
+//
+//        }
+//
+//    }
+    }
