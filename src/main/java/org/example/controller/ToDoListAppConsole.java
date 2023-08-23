@@ -184,17 +184,18 @@ public class ToDoListAppConsole {
         }
 
     }
-//    private static  void deleteUser(Scanner scanner) {
-//        System.out.println("Entrez l'ID de l'utilisateur' à supprimer : ");
-//        Long userId = scanner.nextLong();
-//        scanner.nextLine();
-//
-//        if (taskDAO.deleteTask(userId)) {
-//            System.out.println("Suppression OK");
-//        } else {
-//            System.out.println("Erreur");
-//
-//        }
-//
-//    }
+    private static  void deleteUser(Scanner scanner) {
+        System.out.println("Entrez l'ID de l'utilisateur' à supprimer : ");
+        Long userId = scanner.nextLong();
+        scanner.nextLine();
+
+        if (taskDAO.deleteTask(userId)) {
+            System.out.println("Suppression OK");
+        } else {
+            System.out.println("Erreur");
+
+        }
+
+
     }
+}
