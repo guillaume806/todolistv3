@@ -29,7 +29,8 @@ public class ToDoListAppConsole {
             System.out.println("2. Afficher toutes les tâches de la liste");
             System.out.println("3. Marquer une tâche comme terminée");
             System.out.println("4. Supprimer une tâche de la liste");
-            System.out.println("5. Quitter l'application");
+            System.out.println("5. ajouter un utilisateur");
+            System.out.println("6. Quitter l'application");
             System.out.println("Choix : ");
 
             choice = scanner.nextInt();
@@ -49,6 +50,10 @@ public class ToDoListAppConsole {
                     deleteTask(scanner);
                     break;
                 case 5:
+                    addUser(scanner);
+                    break;
+
+                case 6:
                     System.out.println("Bye");
                     entityManagerFactory.close();
                     break;
@@ -134,5 +139,45 @@ public class ToDoListAppConsole {
         }else {
             System.out.println("Erreur");
         }
+    }
+
+    private  static  void addUser(Scanner scanner) {
+        System.out.println("Entrer le nom de l'utilisateur : ");
+        String name = scanner.nextLine();
+
+        System.out.println("Entrer le titre de la tâche : ");
+        String title = scanner.nextLine();
+
+        System.out.println("Entrer la description de la tâche : ");
+        String description = scanner.nextLine();
+
+        System.out.println("Date limite de la tâche : (dd.MM.yyyy)");
+        String dueDateStr = scanner.nextLine();
+
+        LocalDate dueDate = LocalDate.parse(dueDateStr, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
+        System.out.println("Priorité de la tâche : ");
+        int priority = scanner.nextInt();
+        scanner.nextLine();
+
+        // Creation de la tache
+        Task task = new Task();
+        task.setTitle(title);
+        task.setCompleted(false);
+
+
+        //Creation de la taskinfo
+        TaskInfo taskInfo = new TaskInfo(description,dueDate,priority);
+
+        // Mise en relation
+        task.setTaskInfo(taskInfo);
+        taskInfo.setTask(task);
+
+        if(taskDAO.addTask(task)){
+            System.out.println("Tâche ajoutée avec succès !");
+        }else {
+            System.out.println("Erreur");
+        }
+
     }
 }
