@@ -1,12 +1,10 @@
 package org.example.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table (name= "customers")
 public class User {
     @Id
     @GeneratedValue
@@ -14,23 +12,23 @@ public class User {
 
     private String firstname;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Task> tasks;
 
     public User() {
     }
 
-    public User(long id, String firstname, List<Task> tasks) {
+    public User(Long id, String firstname, List<Task> tasks) {
         this.id = id;
         this.firstname = firstname;
         this.tasks = tasks;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -4,7 +4,7 @@
              version="2.0">
 
 
-    <persistence-unit name="todolist">
+    <persistence-unit name="todolistv3">
 
 
 
@@ -14,7 +14,7 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/todolist" /> <!-- BD Mane -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/todolistv3" /> <!-- BD Mane -->
             <property name="javax.persistence.jdbc.user" value="postgres" /> <!-- DB User -->
             <property name="javax.persistence.jdbc.password" value="Superadmin" /> <!-- DB Password -->
 

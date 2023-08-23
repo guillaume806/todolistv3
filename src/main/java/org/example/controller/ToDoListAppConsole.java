@@ -5,7 +5,9 @@ import org.example.model.Task;
 import org.example.model.TaskInfo;
 import org.example.model.User;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +20,7 @@ public class ToDoListAppConsole {
     private static TaskDAOImpl taskDAO;
 
     public static void main() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("todolist");
+        entityManagerFactory = Persistence.createEntityManagerFactory("todolistv3");
         taskDAO = new TaskDAOImpl(entityManagerFactory);
 
         Scanner scanner = new Scanner(System.in);
@@ -180,6 +182,7 @@ public class ToDoListAppConsole {
         // Mise en relation
         task.setTaskInfo(taskInfo);
         taskInfo.setTask(task);
+        user.setTasks(task);
 
         if (taskDAO.addTask(task)) {
             System.out.println("Tâche ajoutée avec succès !");
@@ -188,18 +191,38 @@ public class ToDoListAppConsole {
         }
 
     }
-    private static  void deleteUser(Scanner scanner) {
+    private static boolean deleteUser(Scanner scanner) {
         System.out.println("Entrez l'ID de l'utilisateur' à supprimer : ");
         Long userId = scanner.nextLong();
         scanner.nextLine();
 
-        if (taskDAO.deleteTask(userId)) {
-            System.out.println("Suppression OK");
-        } else {
-            System.out.println("Erreur");
 
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            User user = entityManager.find(User.class,userId);
+            if(user!= null){
+                entityManager.remove(user);
+                transaction.commit();
+                return true;
+            } else {
+                return false;
+            }
+        }catch (Exception e){
+            if(transaction.isActive()){
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }finally {
+            entityManager.close();
         }
 
 
+
+
     }
+
+
 }
