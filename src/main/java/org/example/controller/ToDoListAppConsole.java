@@ -182,10 +182,10 @@ public class ToDoListAppConsole {
         // Mise en relation
         task.setTaskInfo(taskInfo);
         taskInfo.setTask(task);
-        user.setTasks(task);
+
 
         if (taskDAO.addTask(task)) {
-            System.out.println("Tâche ajoutée avec succès !");
+            System.out.println("utilisateur ajoutée avec succès !");
         } else {
             System.out.println("Erreur");
         }

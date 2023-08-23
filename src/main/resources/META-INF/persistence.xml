@@ -11,6 +11,9 @@
 
 
         <class>org.example.model.Task</class>
+        <class>org.example.model.Category</class>
+        <class>org.example.model.TaskInfo</class>
+        <class>org.example.model.User</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
