@@ -2,6 +2,7 @@ package org.example.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name= "tasks")
@@ -13,7 +14,10 @@ public class Task {
 
     private String title;
     private boolean completed;
-
+    @ManyToMany
+    @JoinTable(name = "category_tag", joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> categories;
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;

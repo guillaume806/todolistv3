@@ -2,6 +2,7 @@ package org.example.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -16,6 +17,8 @@ public class TaskInfo {
     private LocalDate dueDate;
 
     private int priority;
+
+
 
     @OneToOne
     @JoinColumn(name = "task_id")

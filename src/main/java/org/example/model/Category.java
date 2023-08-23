@@ -11,9 +11,8 @@ public class Category {
     private Long id;
 
     private String Cname;
-    @ManyToMany
-    @JoinTable(name = "category", joinColumns = @JoinColumn(name = "tasks_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
+
+    @ManyToMany(mappedBy = "tasks")
     private List<Task> tasks = new ArrayList<>();
 
 
