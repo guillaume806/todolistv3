@@ -31,6 +31,7 @@ public class ToDoListAppConsole {
             System.out.println("3. Marquer une tâche comme terminée");
             System.out.println("4. Supprimer une tâche de la liste");
             System.out.println("5. ajouter un utilisateur");
+            System.out.println("5. supprimer un utilisateur");
             System.out.println("6. Quitter l'application");
             System.out.println("Choix : ");
 
@@ -53,8 +54,11 @@ public class ToDoListAppConsole {
                 case 5:
                     addUser(scanner);
                     break;
-
                 case 6:
+                    deleteUser(scanner);
+                    break;
+
+                case 7:
                     System.out.println("Bye");
                     entityManagerFactory.close();
                     break;
